@@ -3,14 +3,9 @@ import OpenAI from 'openai';
 import 'bootswatch/dist/materia/bootstrap.min.css';
 import LoadSpinner from './components/load-spinner';
 import './App.css';
-import { uniquishId } from './utils/utils';
+import { uniquishId, extractHexColours, type ColourData } from './utils/utils';
 import IntroBox from './components/intro-box';
-
-type ChatData = Array<{
-	id: string | undefined;
-	question: string | undefined;
-	answer: string | undefined;
-}>;
+import ColourView from './views/color-view';
 
 /* Set OAI config object
 NOTE THIS IS FOR DEMO PROJECT PURPOSES ONLY NEVER USE API KEY IN FRONTEND CLIENT IN 
@@ -22,7 +17,7 @@ const openai = new OpenAI({
 });
 
 function App(): React.JSX.Element {
-	const [chatItems, setChatItems] = useState<ChatData>([]);
+	const [aiColourData, setAiColourData] = useState<ColourData>();
 	const [isLoading, setIsLoading] = useState(false);
 	const inputData = useRef<HTMLInputElement>(null);
 
@@ -42,7 +37,14 @@ function App(): React.JSX.Element {
 
 		// Prepare prompt
 		const parameters: OpenAI.Chat.ChatCompletionCreateParams = {
-			messages: [{ role: 'user', content: inputData.current.value }],
+			messages: [
+				{
+					role: 'user',
+					content: `Return only an array of a palette of six colours based on colour wheel 
+			theory as hex values in json format for ${inputData.current.value}, including colour, hex, contrastingColourHex 
+			and description as keys in an object with colours as a key.`,
+				},
+			],
 			model: 'gpt-3.5-turbo',
 		};
 
@@ -68,31 +70,27 @@ function App(): React.JSX.Element {
 		setIsLoading(false);
 
 		// Add new question and answers to array in state to trigger re-render
-		setChatItems((current) => {
-			return [
-				...current,
-				{
-					id: uniquishId(),
-					question: userQuestion,
-					answer: `${OaiAnswer}`,
-				},
-			];
+		setAiColourData({
+			id: uniquishId(),
+			colourPrompt: userQuestion,
+			colours: extractHexColours(OaiAnswer),
 		});
-
-		console.log({ chatItems });
 	};
 
 	return (
 		<>
 			{isLoading && <LoadSpinner />}
-			<IntroBox />
-			<input
-				ref={inputData}
-				className="userInput text-light bg-primary fw-bold footer"
-				type="text"
-				placeholder=">"
-				onKeyUp={submitHandler}
-			/>
+			<div className="Header">
+				<input
+					ref={inputData}
+					className="Header__userInput text-white bg-info fw-bold "
+					type="text"
+					placeholder="Desired colour range e.g a Mediterranean Sunset"
+					onKeyUp={submitHandler}
+				/>
+			</div>
+			{!aiColourData && <IntroBox />}
+			{aiColourData && <ColourView aiColourData={aiColourData} />}
 		</>
 	);
 }
