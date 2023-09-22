@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import OpenAI from 'openai';
 import 'bootswatch/dist/materia/bootstrap.min.css';
 import LoadSpinner from './components/load-spinner';
@@ -21,6 +21,10 @@ function App(): React.JSX.Element {
 	const [isLoading, setIsLoading] = useState(false);
 	const inputData = useRef<HTMLInputElement>(null);
 
+	useEffect(() => {
+		if (inputData.current) inputData.current.focus();
+	});
+
 	const submitHandler = async (event: React.KeyboardEvent<HTMLInputElement>) => {
 		// Screen out empty values or any key press that is not 'enter'
 		if (
@@ -40,9 +44,8 @@ function App(): React.JSX.Element {
 			messages: [
 				{
 					role: 'user',
-					content: `Return only an array of a palette of six colours based on colour wheel 
-			theory as hex values in json format for ${inputData.current.value}, including colour, hex, contrastingColourHex 
-			and description as keys in an object with colours as a key.`,
+					content: `Return only an array of a complemetary palette of ten colours as hex values in json format based ${inputData.current.value}, including colour, hex, contrastingColourHex 
+			and description as keys in an object with colours as a key arranged in order of darkest colours first. Dont include any other text in your response.`,
 				},
 			],
 			model: 'gpt-3.5-turbo',
@@ -68,6 +71,7 @@ function App(): React.JSX.Element {
 			completion?.choices[0].message.content ?? 'error';
 
 		setIsLoading(false);
+		console.log(OaiAnswer);
 
 		// Add new question and answers to array in state to trigger re-render
 		setAiColourData({
@@ -83,9 +87,9 @@ function App(): React.JSX.Element {
 			<div className="Header">
 				<input
 					ref={inputData}
-					className="Header__userInput text-white bg-info fw-bold "
+					className="Header__userInput text-white bg-primary fw-bold "
 					type="text"
-					placeholder="Desired colour range e.g a Mediterranean Sunset"
+					placeholder="What colours should I find?"
 					onKeyUp={submitHandler}
 				/>
 			</div>

@@ -23,3 +23,16 @@ export const extractHexColours = (response: string): HexColourResponse => {
 
 	return colourData?.colours;
 };
+
+export const copyToClipboard = async (copyText: string) => {
+	try {
+		if ('clipboard' in navigator) {
+			await navigator.clipboard.writeText(copyText);
+		} else {
+			// Use for older browsers
+			document.execCommand('copy', true, copyText);
+		}
+	} catch {
+		throw new Error('Error Copying To Clipboard');
+	}
+};

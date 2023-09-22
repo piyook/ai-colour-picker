@@ -11,8 +11,9 @@ export default function ColorBlock(props: {
 			style={{ backgroundColor: props.chosenColorHex, color: props.textColor }}
 		>
 			<p>
-				{' '}
-				{props.chosenColorName} : {props.chosenColorHex}{' '}
+				{props.chosenColorName} <br />
+				<br />
+				{props.chosenColorHex}{' '}
 			</p>
 		</div>
 	);

@@ -9,7 +9,7 @@ function LoadSpinner(): React.JSX.Element {
 				role="status"
 				className="text-white LoadSpinner__spinner"
 			/>
-			<h1 className="display-4 text-white">thinking</h1>
+			<h1 className="display-4 text-white">getting colours</h1>
 		</div>
 	);
 }
