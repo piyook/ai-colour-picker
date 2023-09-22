@@ -4,7 +4,7 @@
 
 A Open AI powered colour picking utility built using Vite, React and TypeScript.
 
-The App constructs a suitable prompt using the users input that then returns a json object with the requested colour information.
+The App constructs a suitable prompt using the users input that then returns a JSON object with the requested colour information.
 
 Results can be copied to local clipboard as JSON data and pasted into a code editor for use.
 
