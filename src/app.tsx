@@ -44,7 +44,7 @@ function App(): React.JSX.Element {
 			messages: [
 				{
 					role: 'user',
-					content: `Return only an array of a complemetary palette of ten colours as hex values in json format based ${inputData.current.value}, including colour, hex, contrastingColourHex 
+					content: `Return only an array of a complemetary palette of twenty colours as hex values in json format based ${inputData.current.value}, including colour, hex, contrastingColourHex 
 			and description as keys in an object with colours as a key arranged in order of darkest colours first. Dont include any other text in your response.`,
 				},
 			],
