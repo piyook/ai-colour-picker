@@ -9,7 +9,7 @@ function IntroBox(): React.JSX.Element {
 				Enter a word or sentence in the box above to get a range of six colours
 				inspired by this phrase.
 				<br />
-				For example try &apos;Cyberpunk&apos;.
+				For example try &apos;Autumn Leaf&apos;.
 			</div>
 		</Stack>
 	);
