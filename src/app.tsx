@@ -1,16 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import OpenAI from 'openai';
 import 'bootswatch/dist/materia/bootstrap.min.css';
 import LoadSpinner from './components/load-spinner';
 import './App.css';
-import { uniquishId } from './utils/utils';
+import { uniquishId, extractHexColours, type ColourData } from './utils/utils';
 import IntroBox from './components/intro-box';
-
-type ChatData = Array<{
-	id: string | undefined;
-	question: string | undefined;
-	answer: string | undefined;
-}>;
+import ColourView from './views/color-view';
 
 /* Set OAI config object
 NOTE THIS IS FOR DEMO PROJECT PURPOSES ONLY NEVER USE API KEY IN FRONTEND CLIENT IN 
@@ -22,9 +17,13 @@ const openai = new OpenAI({
 });
 
 function App(): React.JSX.Element {
-	const [chatItems, setChatItems] = useState<ChatData>([]);
+	const [aiColourData, setAiColourData] = useState<ColourData>();
 	const [isLoading, setIsLoading] = useState(false);
 	const inputData = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		if (inputData.current) inputData.current.focus();
+	});
 
 	const submitHandler = async (event: React.KeyboardEvent<HTMLInputElement>) => {
 		// Screen out empty values or any key press that is not 'enter'
@@ -42,7 +41,13 @@ function App(): React.JSX.Element {
 
 		// Prepare prompt
 		const parameters: OpenAI.Chat.ChatCompletionCreateParams = {
-			messages: [{ role: 'user', content: inputData.current.value }],
+			messages: [
+				{
+					role: 'user',
+					content: `Return only an array of a complemetary palette of ten colours as hex values in json format based ${inputData.current.value}, including colour, hex, contrastingColourHex 
+			and description as keys in an object with colours as a key arranged in order of darkest colours first. Dont include any other text in your response.`,
+				},
+			],
 			model: 'gpt-3.5-turbo',
 		};
 
@@ -66,33 +71,30 @@ function App(): React.JSX.Element {
 			completion?.choices[0].message.content ?? 'error';
 
 		setIsLoading(false);
+		console.log(OaiAnswer);
 
 		// Add new question and answers to array in state to trigger re-render
-		setChatItems((current) => {
-			return [
-				...current,
-				{
-					id: uniquishId(),
-					question: userQuestion,
-					answer: `${OaiAnswer}`,
-				},
-			];
+		setAiColourData({
+			id: uniquishId(),
+			colourPrompt: userQuestion,
+			colours: extractHexColours(OaiAnswer),
 		});
-
-		console.log({ chatItems });
 	};
 
 	return (
 		<>
 			{isLoading && <LoadSpinner />}
-			<IntroBox />
-			<input
-				ref={inputData}
-				className="userInput text-light bg-primary fw-bold footer"
-				type="text"
-				placeholder=">"
-				onKeyUp={submitHandler}
-			/>
+			<div className="Header">
+				<input
+					ref={inputData}
+					className="Header__userInput text-white bg-primary fw-bold "
+					type="text"
+					placeholder="What colours should I find?"
+					onKeyUp={submitHandler}
+				/>
+			</div>
+			{!aiColourData && <IntroBox />}
+			{aiColourData && <ColourView aiColourData={aiColourData} />}
 		</>
 	);
 }
