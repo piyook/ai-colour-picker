@@ -1,4 +1,4 @@
-# DEMO AI Colour Picker Tool
+# AI Colour Generator / Picker Tool
 
 ## Description
 
@@ -10,7 +10,8 @@ Results can be copied to local clipboard as JSON data and pasted into a code edi
 
 ### NOTE: This is a demo project only. Never put Open AI API keys inside a production frontend client application. Instead create a backend API to contact Open AI and relay the response back to the client app using any required authorisation method
 
-![intro view](images/intro.png) ![loading view](images/loading.png)![response view](images/response.png)
+![intro view](images/intro.png) ![loading view](images/loading.png)  
+![response view1](images/response.png) ![response view1](images/response2.png)
 
 ## Set-up
 
