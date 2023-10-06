@@ -30,4 +30,4 @@ This will start up up the VITE dev server and serve the app from localhost:5173
 
 ## TO DO
 
-- Build a local dockerized Node.js backend service to contact Open AI and remove need for OpenAI API key in the App.
+- Add option to connect to local dockerized Node.js backend service to contact Open AI and remove need for OpenAI API key in the App. See <https://github.com/piyook/open-ai-backend>
