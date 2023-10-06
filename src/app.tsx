@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import OpenAI from 'openai';
+import { AnimatePresence } from 'framer-motion';
 import 'bootswatch/dist/materia/bootstrap.min.css';
 import LoadSpinner from './components/load-spinner';
 import './App.css';
@@ -44,7 +45,7 @@ function App(): React.JSX.Element {
 			messages: [
 				{
 					role: 'user',
-					content: `Return only an array of a complemetary palette of twenty colours as hex values in json format based ${inputData.current.value}, including colour, hex, contrastingColourHex 
+					content: `Return only an array of a complemetary palette of six colours as hex values in json format based ${inputData.current.value}, including colour, hex, contrastingColourHex 
 			and description as keys in an object with colours as a key arranged in order of darkest colours first. Dont include any other text in your response.`,
 				},
 			],
@@ -83,8 +84,11 @@ function App(): React.JSX.Element {
 
 	return (
 		<>
-			{isLoading && <LoadSpinner />}
-			<div className="Header">
+			<AnimatePresence>{isLoading && <LoadSpinner />}</AnimatePresence>
+			<header className="Header">
+				<div>
+					<h5 className="Header_strapline">AI Colour Generator</h5>
+				</div>
 				<input
 					ref={inputData}
 					className="Header__userInput text-white bg-primary fw-bold "
@@ -92,9 +96,11 @@ function App(): React.JSX.Element {
 					placeholder="What colours should I find?"
 					onKeyUp={submitHandler}
 				/>
-			</div>
+			</header>
 			{!aiColourData && <IntroBox />}
-			{aiColourData && <ColourView aiColourData={aiColourData} />}
+			<AnimatePresence>
+				{aiColourData && !isLoading && <ColourView aiColourData={aiColourData} />}
+			</AnimatePresence>
 		</>
 	);
 }

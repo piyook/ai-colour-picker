@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import { motion } from 'framer-motion';
 import type { ColourData, HexColourResponse } from '../utils/utils';
 import ColourResults from '../components/color-results';
 import { copyToClipboard } from '../utils/utils';
@@ -24,11 +25,22 @@ function ColourView(props: {
 		return <h2>No Data</h2>;
 
 	return (
-		<>
+		<motion.div
+			variants={{
+				hidden: { opacity: 0 },
+				visible: { opacity: 1 },
+			}}
+			initial="hidden"
+			animate="visible"
+			exit="hidden"
+			transition={{ duration: 0.5 }}
+		>
 			<h2 className="ColourView__themeText display-4">
 				{props.aiColourData.colourPrompt}
 			</h2>
-			<ColourResults colours={props.aiColourData?.colours} />
+			<div>
+				<ColourResults colours={props.aiColourData?.colours} />
+			</div>
 			<Button
 				variant="primary mt-5"
 				onClick={async () => {
@@ -37,7 +49,7 @@ function ColourView(props: {
 			>
 				Copy JSON Results To Clipboard
 			</Button>
-		</>
+		</motion.div>
 	);
 }
 
