@@ -2,7 +2,7 @@
 
 ## Description
 
-A Open AI powered colour picking utility built using Vite, React and TypeScript.
+An OpenAI powered colour picking utility built using Vite, React and TypeScript.
 
 The App constructs a suitable prompt using the users input that then returns a JSON object with the requested colour information.
 
