@@ -2,7 +2,11 @@ import React from 'react';
 import { Spinner } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 
-function LoadSpinner(): React.JSX.Element {
+type LoadSpinnerProps = {
+	readonly prompt: string | undefined;
+};
+
+function LoadSpinner({ prompt }: LoadSpinnerProps): React.JSX.Element {
 	return (
 		<motion.div
 			className="LoadSpinner"
@@ -21,6 +25,8 @@ function LoadSpinner(): React.JSX.Element {
 				className="text-white LoadSpinner__spinner"
 			/>
 			<h1 className="display-4 text-white">getting colours</h1>
+			<h3 className="display-6 text-white">for</h3>
+			<h3 className="display-6 text-white"> {prompt}</h3>
 		</motion.div>
 	);
 }

@@ -22,6 +22,7 @@ function App(): React.JSX.Element {
 	const [aiColourData, setAiColourData] = useState<ColourData>();
 	const [isLoading, setIsLoading] = useState(false);
 	const [numberOfColours, setNumberOfColours] = useState('6');
+	const [loadSpinnerText, setLoadSpinnerText] = useState('');
 	const inputData = useRef<HTMLInputElement>(null);
 
 	const slider = useRef<HTMLInputElement>(null);
@@ -54,7 +55,7 @@ function App(): React.JSX.Element {
 
 		// Set up return data and set loading spinner until OAI response is obtained
 		const userQuestion = inputData.current.value;
-
+		setLoadSpinnerText(userQuestion?.toLocaleLowerCase());
 		setIsLoading(true);
 
 		// Prepare prompt
@@ -100,9 +101,11 @@ function App(): React.JSX.Element {
 
 	return (
 		<>
-			<AnimatePresence>{isLoading && <LoadSpinner />}</AnimatePresence>
+			<AnimatePresence>
+				{isLoading && <LoadSpinner prompt={loadSpinnerText ?? null} />}
+			</AnimatePresence>
 			<header className="Header">
-				<div>
+				<div className="Header_strapline">
 					<h5>AI Colour Generator</h5>
 				</div>
 				<input
