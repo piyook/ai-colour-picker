@@ -32,17 +32,12 @@
 	font-style: italic;
 }
 
-.Header_strapline {
-	align-self: flex-end;
-}
-
 .Header_slider {
-	/* max-width: 300px; */
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	align-items: cemter;
-	background-color: bisque;
+	align-items: center;
+	/* margin: 10px 0px 0px 0px; */
 }
 
 .Header__userInput {
