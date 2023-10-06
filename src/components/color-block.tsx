@@ -10,7 +10,7 @@ export default function ColorBlock(props: {
 			className="ColorBlock"
 			style={{ backgroundColor: props.chosenColorHex, color: props.textColor }}
 		>
-			<p>
+			<p className="ColorBlock_info">
 				{props.chosenColorName} <br />
 				<br />
 				{props.chosenColorHex}{' '}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import type { HexColourResponse } from '../utils/utils';
 import { uniquishId } from '../utils/utils';
@@ -15,7 +16,10 @@ function ColourResults(props: {
 	);
 
 	return (
-		<div className="ColorResults">
+		<motion.div
+			className="ColorResults"
+			variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+		>
 			{props.colours.map((colour) => {
 				return (
 					<OverlayTrigger
@@ -24,17 +28,24 @@ function ColourResults(props: {
 						delay={{ show: 250, hide: 400 }}
 						overlay={renderTooltip(colour.description)}
 					>
-						<div className="ColorResults__result">
+						<motion.div
+							className="ColorResults__result"
+							variants={{
+								hidden: { opacity: 0, y: -40 },
+								visible: { opacity: 1, y: 0 },
+							}}
+							transition={{ type: 'spring', duration: 1 }}
+						>
 							<ColorBlock
 								chosenColorHex={colour.hex}
 								chosenColorName={colour.colour}
 								textColor={colour.contrastingColourHex}
 							/>
-						</div>
+						</motion.div>
 					</OverlayTrigger>
 				);
 			})}
-		</div>
+		</motion.div>
 	);
 }
 
