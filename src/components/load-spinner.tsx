@@ -25,8 +25,12 @@ function LoadSpinner({ prompt }: LoadSpinnerProps): React.JSX.Element {
 				className="text-white LoadSpinner__spinner"
 			/>
 			<h1 className="display-4 text-white">getting colours</h1>
-			<h3 className="display-6 text-white">for</h3>
-			<h3 className="display-6 text-white"> {prompt}</h3>
+			{prompt && (
+				<>
+					<h3 className="display-6 text-white">for</h3>
+					<h3 className="display-6 text-white"> {prompt}</h3>
+				</>
+			)}
 		</motion.div>
 	);
 }
