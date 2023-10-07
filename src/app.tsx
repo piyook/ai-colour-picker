@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import OpenAI from 'openai';
 import { AnimatePresence } from 'framer-motion';
-import FormRange from 'react-bootstrap/FormRange';
 import 'bootswatch/dist/materia/bootstrap.min.css';
 import LoadSpinner from './components/load-spinner';
 import './App.css';
 import { uniquishId, extractHexColours, type ColourData } from './utils/utils';
+import { HeaderBlock } from './components/header-block';
 import IntroBox from './components/intro-box';
 import ColourView from './views/color-view';
 
@@ -21,40 +21,12 @@ const openai = new OpenAI({
 function App(): React.JSX.Element {
 	const [aiColourData, setAiColourData] = useState<ColourData>();
 	const [isLoading, setIsLoading] = useState(false);
-	const [numberOfColours, setNumberOfColours] = useState('6');
 	const [loadSpinnerText, setLoadSpinnerText] = useState('');
-	const inputData = useRef<HTMLInputElement>(null);
 
-	const slider = useRef<HTMLInputElement>(null);
-
-	useEffect(() => {
-		if (inputData.current) inputData.current.focus();
-	});
-
-	const rangeHandler = () => {
-		if (slider?.current) {
-			let currentValue = Math.floor(Number.parseInt(slider.current.value, 10) / 5);
-			if (currentValue === 0) {
-				currentValue = 1;
-			}
-
-			setNumberOfColours(currentValue.toString());
-
-			setAiColourData(undefined);
-		}
-	};
-
-	const submitHandler = async (event: React.KeyboardEvent<HTMLInputElement>) => {
-		// Screen out empty values or any key press that is not 'enter'
-		if (
-			event.key !== 'Enter' ||
-			inputData.current === null ||
-			inputData.current.value === ''
-		)
-			return;
-
-		// Set up return data and set loading spinner until OAI response is obtained
-		const userQuestion = inputData.current.value;
+	const submitHandler = async (
+		userQuestion: string,
+		numberOfColours: string,
+	) => {
 		setLoadSpinnerText(userQuestion?.toLocaleLowerCase());
 		setIsLoading(true);
 
@@ -63,15 +35,12 @@ function App(): React.JSX.Element {
 			messages: [
 				{
 					role: 'user',
-					content: `Return only an array of a complemetary palette of ${numberOfColours} colours as hex values in json format based ${inputData.current.value}, including colour, hex, contrastingColourHex 
+					content: `Return only an array of a complemetary palette of ${numberOfColours} colours as hex values in json format based ${userQuestion}, including colour, hex, contrastingColourHex 
 			and description as keys in an object with colours as a key arranged in order of darkest colours first. Dont include any other text in your response.`,
 				},
 			],
 			model: 'gpt-3.5-turbo',
 		};
-
-		// Reset input to empty
-		inputData.current.value = '';
 
 		// Get OAI response with user supplied prompt and await response
 		const completion: OpenAI.Chat.ChatCompletion | undefined =
@@ -104,23 +73,11 @@ function App(): React.JSX.Element {
 			<AnimatePresence>
 				{isLoading && <LoadSpinner prompt={loadSpinnerText ?? null} />}
 			</AnimatePresence>
-			<header className="Header">
-				<div className="Header_strapline">
-					<h5>AI Colour Generator</h5>
-				</div>
-				<input
-					ref={inputData}
-					className="Header__userInput text-white bg-primary fw-bold "
-					type="text"
-					placeholder="What kind of colours should I find?"
-					onKeyUp={submitHandler}
-				/>
-				<div>Colours : {numberOfColours}</div>
-				<div className="Header_slider">
-					<FormRange ref={slider} onChange={rangeHandler} />
-				</div>
-			</header>
+
+			<HeaderBlock submitHandler={submitHandler} />
+
 			{!aiColourData && <IntroBox />}
+
 			<AnimatePresence>
 				{aiColourData && !isLoading && <ColourView aiColourData={aiColourData} />}
 			</AnimatePresence>
