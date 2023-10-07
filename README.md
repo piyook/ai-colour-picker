@@ -29,6 +29,16 @@ From the command line run
 
 This will start up up the VITE dev server and serve the app from localhost:5173
 
+## Using
+
+Enter a word or phrase to send to OpenAI to generate the desired number of colours. Press 'enter' or click the submit button to send a request.
+
+Change the number of colours generated using the slider to change the value from 1 to 20. Note the larger the number of colours the longer the response time.  
+
+The loader screen will appear whilst waiting for a response from OpenAI (this can take some time) and the colour pallete will be produced once a response is received.
+
+Colours can be copied as JSON data to the clipboard to be pasted in a code editor or other software.
+
 ## TO DO
 
 - Add option to connect to local dockerized Node.js backend service to contact Open AI and remove need for OpenAI API key in the App. See <https://github.com/piyook/open-ai-backend>
