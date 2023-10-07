@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import FormRange from 'react-bootstrap/FormRange';
+import { Button } from 'react-bootstrap';
 
 type HeaderBlockProps = {
 	readonly submitHandler: (
@@ -46,6 +47,14 @@ export function HeaderBlock({
 		inputData.current.value = '';
 	};
 
+	const clickHandler = async () => {
+		if (inputData.current === null || inputData.current.value === '') return;
+
+		await submitHandler(inputData.current.value, numberOfColours);
+
+		inputData.current.value = '';
+	};
+
 	return (
 		<header className="Header">
 			<div className="Header_strapline">
@@ -58,12 +67,19 @@ export function HeaderBlock({
 				placeholder="What kind of colours should I find?"
 				onKeyUp={inputHandler}
 			/>
+
 			<div>Colours : {numberOfColours}</div>
 			<div className="Header_slider">
 				<FormRange ref={slider} onChange={rangeHandler} />
 			</div>
+			<Button
+				className="mt-2"
+				variant="outline-info"
+				size="sm"
+				onClick={clickHandler}
+			>
+				Submit
+			</Button>
 		</header>
-
-		// Add a submit button as its not clear to submit with enter
 	);
 }
