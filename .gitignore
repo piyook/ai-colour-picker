@@ -27,3 +27,6 @@ dist-ssr
 !example.env
 
 *.draft
+
+cypress/screenshots
+cypress/videos
