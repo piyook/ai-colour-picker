@@ -3,6 +3,7 @@ import OpenAI from 'openai';
 import { AnimatePresence } from 'framer-motion';
 import 'bootswatch/dist/materia/bootstrap.min.css';
 import LoadSpinner from './components/load-spinner';
+import { ErrorModal } from './components/error-modal';
 import './App.css';
 import { uniquishId, extractHexColours, type ColourData } from './utils/utils';
 import { HeaderBlock } from './components/header-block';
@@ -22,6 +23,8 @@ function App(): React.JSX.Element {
 	const [aiColourData, setAiColourData] = useState<ColourData>();
 	const [isLoading, setIsLoading] = useState(false);
 	const [loadSpinnerText, setLoadSpinnerText] = useState('');
+	const [errorMessage, setErrorMessage] = useState<string>('');
+	const [modalShow, setModalShow] = React.useState(false);
 
 	const submitHandler = async (
 		userQuestion: string,
@@ -29,6 +32,8 @@ function App(): React.JSX.Element {
 	) => {
 		setLoadSpinnerText(userQuestion?.toLocaleLowerCase());
 		setIsLoading(true);
+		setErrorMessage('');
+		setModalShow(false);
 
 		// Prepare prompt
 		const parameters: OpenAI.Chat.ChatCompletionCreateParams = {
@@ -42,34 +47,49 @@ function App(): React.JSX.Element {
 			model: 'gpt-3.5-turbo',
 		};
 
-		// Get OAI response with user supplied prompt and await response
-		const completion: OpenAI.Chat.ChatCompletion | undefined =
-			await openai.chat.completions.create(parameters).catch((error) => {
-				if (error instanceof OpenAI.APIError) {
-					console.log(error.status);
-					console.log(error.message);
-					return undefined;
-				}
+		let OaiAnswer: string | undefined;
 
-				throw new Error('Sorry - there was an error. Please Try again later.');
+		try {
+			// Get OAI response with user supplied prompt and await response
+			const completion: OpenAI.Chat.ChatCompletion | undefined =
+				await openai.chat.completions.create(parameters).catch((error) => {
+					if (error instanceof OpenAI.APIError) {
+						console.log(error.status);
+						console.log(error.message);
+						setErrorMessage(error.message);
+						setModalShow(true);
+						return undefined;
+					}
+				});
+
+			// Set OAI response and unset loading spinner
+			OaiAnswer = completion?.choices[0].message.content ?? 'error';
+
+			setIsLoading(false);
+
+			// Add new question and answers to array in state to trigger re-render
+			setAiColourData({
+				id: uniquishId(),
+				colourPrompt: userQuestion,
+				colours: extractHexColours(OaiAnswer),
 			});
-
-		// Set OAI response and unset loading spinner
-		const OaiAnswer: string | undefined =
-			completion?.choices[0].message.content ?? 'error';
-
-		setIsLoading(false);
-
-		// Add new question and answers to array in state to trigger re-render
-		setAiColourData({
-			id: uniquishId(),
-			colourPrompt: userQuestion,
-			colours: extractHexColours(OaiAnswer),
-		});
+		} catch {
+			// Catch any type of error and if not set, set error message
+			setIsLoading(false);
+			setModalShow(true);
+			return undefined;
+		}
 	};
 
 	return (
 		<>
+			<ErrorModal
+				isShow={modalShow}
+				message={errorMessage}
+				onHide={() => {
+					setModalShow(false);
+				}}
+			/>
 			<AnimatePresence>
 				{isLoading && <LoadSpinner prompt={loadSpinnerText ?? null} />}
 			</AnimatePresence>
@@ -79,7 +99,7 @@ function App(): React.JSX.Element {
 			{!aiColourData && <IntroBox />}
 
 			<AnimatePresence>
-				{aiColourData && !isLoading && <ColourView aiColourData={aiColourData} />}
+				{aiColourData && <ColourView aiColourData={aiColourData} />}
 			</AnimatePresence>
 		</>
 	);

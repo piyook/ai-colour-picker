@@ -15,7 +15,9 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+import '../../src/index.css';
 import '../../src/App.css';
+import 'bootswatch/dist/materia/bootstrap.min.css';
 
 
 // Alternatively you can use CommonJS syntax:

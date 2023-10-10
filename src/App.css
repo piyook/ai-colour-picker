@@ -33,12 +33,12 @@
 	font-style: italic;
 }
 
-.Header_strapline {
+.Header__strapline {
 	width: 100%;
 	text-align: end;
 }
 
-.Header_slider {
+.Header__slider {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
