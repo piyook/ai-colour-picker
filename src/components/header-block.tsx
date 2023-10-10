@@ -57,7 +57,7 @@ export function HeaderBlock({
 
 	return (
 		<header className="Header">
-			<div className="Header_strapline">
+			<div className="Header__strapline">
 				<h5>AI Colour Generator</h5>
 			</div>
 			<input
@@ -68,8 +68,8 @@ export function HeaderBlock({
 				onKeyUp={inputHandler}
 			/>
 
-			<div>Colours : {numberOfColours}</div>
-			<div className="Header_slider">
+			<div className="Header__colourTotal">Colours : {numberOfColours}</div>
+			<div className="Header__slider">
 				<FormRange ref={slider} onChange={rangeHandler} />
 			</div>
 			<Button
