@@ -1,5 +1,5 @@
 #root {
-	max-width: 1000px;
+	max-width: 1200px;
 	margin: 0 auto;
 	text-align: center;
 	width: 100%;
@@ -13,7 +13,6 @@
 	position: sticky;
 	top: 0;
 	width: 100%;
-	max-width: 800px;
 	line-height: 60px;
 	z-index: 100;
 	padding: 10px;
@@ -21,7 +20,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin: 10px 0px 0px 0px;
+	background-color: white;
 }
 
 .Header > input:focus {
@@ -66,8 +65,8 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background-color: rgba(1, 1, 1, 0.7);
-	backdrop-filter: blur(2px);
+	background-color: rgba(1, 1, 1, 0.5);
+	backdrop-filter: blur(1px);
 	z-index: 9999;
 }
 

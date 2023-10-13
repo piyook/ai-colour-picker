@@ -33,7 +33,7 @@ function ColourView(props: {
 			initial="hidden"
 			animate="visible"
 			exit="hidden"
-			transition={{ duration: 0.5 }}
+			transition={{ duration: 0.7 }}
 		>
 			<h2 className="ColourView__themeText display-4">
 				{props.aiColourData.colourPrompt}
