@@ -13,6 +13,7 @@ export function HeaderBlock({
 	submitHandler,
 }: HeaderBlockProps): React.JSX.Element {
 	const [numberOfColours, setNumberOfColours] = useState('6');
+	const [currentTopic, setCurrentTopic] = useState<string>();
 	const inputData = useRef<HTMLInputElement>(null);
 	const slider = useRef<HTMLInputElement>(null);
 
@@ -40,6 +41,8 @@ export function HeaderBlock({
 		)
 			return;
 
+		setCurrentTopic(inputData.current.value);
+
 		// Set up return data and set loading spinner until OAI response is obtained
 		await submitHandler(inputData.current.value, numberOfColours);
 
@@ -49,6 +52,8 @@ export function HeaderBlock({
 
 	const clickHandler = async () => {
 		if (inputData.current === null || inputData.current.value === '') return;
+
+		setCurrentTopic(inputData.current.value);
 
 		await submitHandler(inputData.current.value, numberOfColours);
 
@@ -68,18 +73,31 @@ export function HeaderBlock({
 				onKeyUp={inputHandler}
 			/>
 
-			<div className="Header__colourTotal">Colours : {numberOfColours}</div>
-			<div className="Header__slider">
-				<FormRange ref={slider} onChange={rangeHandler} />
+			<div className="Header__widgetBar">
+				<div className="Header__sliderGroup">
+					<div className="Header__colourTotal">Colours : {numberOfColours}</div>
+					<div className="Header__slider">
+						<FormRange ref={slider} onChange={rangeHandler} />
+					</div>
+				</div>
+
+				<Button
+					className="mt-4"
+					variant="outline-success"
+					size="lg"
+					onClick={clickHandler}
+				>
+					Get Colors
+				</Button>
+
+				<div className="Header__currentTopic">
+					<h6>Current Topic</h6>
+					<h5 className="text-primary display-6">
+						{' '}
+						{currentTopic ? currentTopic?.toLocaleLowerCase() : 'none'}
+					</h5>
+				</div>
 			</div>
-			<Button
-				className="mt-2"
-				variant="outline-info"
-				size="sm"
-				onClick={clickHandler}
-			>
-				Submit
-			</Button>
 		</header>
 	);
 }

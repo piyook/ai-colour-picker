@@ -37,6 +37,20 @@
 	text-align: end;
 }
 
+.Header__widgetBar {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+	padding: 0px 20px 20px 20px;
+	border: 1px rgba(0, 0, 0, 0.2) solid;
+}
+
+.Header__sliderGroup {
+	padding: 0px 0px 0px 0px;
+}
+
 .Header__slider {
 	display: flex;
 	flex-direction: row;
@@ -53,6 +67,13 @@
 	padding: 10px;
 	justify-self: flex-end;
 	opacity: 0.85;
+}
+
+.Header__currentTopic {
+	margin: 10px 0px 0px 0px;
+	padding: 0px 0px 10px 0px;
+	text-align: right;
+	max-width: 300px;
 }
 
 .LoadSpinner {
@@ -91,6 +112,7 @@
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
+	margin: 50px 0px 0px 0px;
 }
 
 .ColorResults__result {
@@ -122,6 +144,7 @@
 .ColorBlock:hover {
 	opacity: 0.8;
 	scale: 1.1;
+	border: 1px rgba(0, 0, 0, 0.2) solid;
 }
 
 .ColorBlock_info {

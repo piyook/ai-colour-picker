@@ -33,6 +33,8 @@ This will start up up the VITE dev server and serve the app from localhost:5173
 
 Enter a word or phrase to send to OpenAI to generate the desired number of colours. Press 'enter' or click the submit button to send a request.
 
+The OpenAI API response is streamed and the colours updated as they are received by the app in real time. This method was chosen over waiting for a full response to complete before dispaying the colours produced. This was due to the length of the response times - especially for a larger number of colours, and the lack of feedback to a user.
+
 Change the number of colours generated using the slider to change the value from 1 to 20. Note the larger the number of colours the longer the response time.  
 
 The loader screen will appear whilst waiting for a response from OpenAI (this can take some time) and the colour pallete will be produced once a response is received.

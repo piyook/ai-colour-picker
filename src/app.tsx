@@ -24,7 +24,7 @@ function App(): React.JSX.Element {
 	const [isLoading, setIsLoading] = useState(false);
 	const [loadSpinnerText, setLoadSpinnerText] = useState('');
 	const [errorMessage, setErrorMessage] = useState<string>('');
-	const [modalShow, setModalShow] = React.useState(false);
+	const [modalShow, setModalShow] = useState(false);
 
 	const submitHandler = async (
 		userQuestion: string,
