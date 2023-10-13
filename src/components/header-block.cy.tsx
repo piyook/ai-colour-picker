@@ -25,7 +25,7 @@ describe('<App />', () => {
 		cy.get('.Header__userInput').should('exist');
 		cy.get('.Header__colourTotal').should('contain.text', 'Colours : 6');
 		cy.get('.Header__slider').should('exist');
-		cy.get('Button').should('contain.text', 'Submit');
+		cy.get('Button').should('contain.text', 'Get Colors');
 	});
 
 	it('slider works as expected', () => {
