@@ -5,12 +5,14 @@ export const uniquishId = (): string => {
 	);
 };
 
-export type HexColourResponse = Array<{
-	colour: string;
-	hex: string;
-	description: string;
-	contrastingColourHex: string;
-}>;
+export type HexColourResponse =
+	| Array<{
+			colour: string;
+			hex: string;
+			description: string;
+			contrastingColourHex: string;
+	  }>
+	| undefined;
 
 export type ColourData = {
 	id: string | undefined;
@@ -19,9 +21,18 @@ export type ColourData = {
 };
 
 export const extractHexColours = (response: string): HexColourResponse => {
-	const colourData = JSON.parse(response) as { colours: HexColourResponse };
+	// Remove trailing comma that would invalidate JSON and close JSON for individual chunk of data
+	const responseChunk = response.replace(/,\s*$/, '') + '] }';
 
-	return colourData?.colours;
+	// See if it is possible to parse valid JSON (a complete chunk) otherwise return nothing
+	try {
+		const colourData = JSON.parse(responseChunk) as {
+			colours: HexColourResponse;
+		};
+		return colourData?.colours;
+	} catch {
+		return undefined;
+	}
 };
 
 export const copyToClipboard = async (copyText: string) => {

@@ -24,7 +24,7 @@ function App(): React.JSX.Element {
 	const [isLoading, setIsLoading] = useState(false);
 	const [loadSpinnerText, setLoadSpinnerText] = useState('');
 	const [errorMessage, setErrorMessage] = useState<string>('');
-	const [modalShow, setModalShow] = React.useState(false);
+	const [modalShow, setModalShow] = useState(false);
 
 	const submitHandler = async (
 		userQuestion: string,
@@ -45,14 +45,13 @@ function App(): React.JSX.Element {
 				},
 			],
 			model: 'gpt-3.5-turbo',
+			stream: true,
 		};
 
-		let OaiAnswer: string | undefined;
-
 		try {
-			// Get OAI response with user supplied prompt and await response
-			const completion: OpenAI.Chat.ChatCompletion | undefined =
-				await openai.chat.completions.create(parameters).catch((error) => {
+			const stream = await openai.chat.completions
+				.create(parameters)
+				.catch((error) => {
 					if (error instanceof OpenAI.APIError) {
 						console.log(error.status);
 						console.log(error.message);
@@ -62,17 +61,27 @@ function App(): React.JSX.Element {
 					}
 				});
 
-			// Set OAI response and unset loading spinner
-			OaiAnswer = completion?.choices[0].message.content ?? 'error';
+			let response = '';
+
+			if (!stream) throw new Error('error');
+
+			for await (const part of stream) {
+				response += part.choices[0]?.delta?.content ?? '';
+
+				// Add new question and answers to array in state to trigger re-render
+
+				const streamedColours = extractHexColours(response);
+
+				if (streamedColours) {
+					setAiColourData({
+						id: uniquishId(),
+						colourPrompt: userQuestion,
+						colours: streamedColours,
+					});
+				}
+			}
 
 			setIsLoading(false);
-
-			// Add new question and answers to array in state to trigger re-render
-			setAiColourData({
-				id: uniquishId(),
-				colourPrompt: userQuestion,
-				colours: extractHexColours(OaiAnswer),
-			});
 		} catch {
 			// Catch any type of error and if not set, set error message
 			setIsLoading(false);

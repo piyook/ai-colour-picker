@@ -18,7 +18,7 @@ function ColourResults(props: {
 	return (
 		<motion.div
 			className="ColorResults"
-			variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+			variants={{ visible: { transition: { staggerChildren: 0.6 } } }}
 		>
 			{props.colours.map((colour) => {
 				return (
@@ -31,10 +31,10 @@ function ColourResults(props: {
 						<motion.div
 							className="ColorResults__result"
 							variants={{
-								hidden: { opacity: 0, y: -40 },
+								hidden: { opacity: 0, y: -5 },
 								visible: { opacity: 1, y: 0 },
 							}}
-							transition={{ type: 'spring', duration: 1 }}
+							transition={{ type: 'spring', duration: 2 }}
 						>
 							<ColorBlock
 								chosenColorHex={colour.hex}
