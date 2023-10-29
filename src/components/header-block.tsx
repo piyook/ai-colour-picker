@@ -62,17 +62,6 @@ export function HeaderBlock({
 
 	return (
 		<header className="Header">
-			<div className="Header__strapline">
-				<h5>AI Colour Generator</h5>
-			</div>
-			<input
-				ref={inputData}
-				className="Header__userInput text-white bg-primary fw-bold "
-				type="text"
-				placeholder="What kind of colours should I find?"
-				onKeyUp={inputHandler}
-			/>
-
 			<div className="Header__widgetBar">
 				<div className="Header__sliderGroup">
 					<div className="Header__colourTotal">Colours : {numberOfColours}</div>
@@ -82,22 +71,33 @@ export function HeaderBlock({
 				</div>
 
 				<Button
-					className="mt-4"
-					variant="outline-success"
-					size="lg"
+					className="mt-4 Header__button"
+					variant="primary"
+					size="sm"
 					onClick={clickHandler}
 				>
 					Get Colors
 				</Button>
 
 				<div className="Header__currentTopic">
-					<h6>Current Topic</h6>
-					<h5 className="text-primary display-6">
+					<div className="Header__strapline">
+						<h5>AI Colour Generator Tool</h5>
+					</div>
+					<h6>colour topic: </h6>
+					<h5 className="text-primary">
 						{' '}
 						{currentTopic ? currentTopic?.toLocaleLowerCase() : 'none'}
 					</h5>
 				</div>
 			</div>
+			<input
+				ref={inputData}
+				className="Header__userInput text-primary border border-secondary
+				 fw-bold "
+				type="text"
+				placeholder="What kind of colours should I find?"
+				onKeyUp={inputHandler}
+			/>
 		</header>
 	);
 }
