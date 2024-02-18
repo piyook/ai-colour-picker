@@ -2,11 +2,11 @@ import React from 'react';
 import { Spinner } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 
-type LoadSpinnerProps = {
+type LoadSpinnerProperties = {
     readonly prompt: string | undefined;
 };
 
-function LoadSpinner({ prompt }: LoadSpinnerProps): React.JSX.Element {
+function LoadSpinner({ prompt }: LoadSpinnerProperties): React.JSX.Element {
     return (
         <motion.div
             className="LoadSpinner"

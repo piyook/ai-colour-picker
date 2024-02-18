@@ -1,11 +1,14 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { motion } from 'framer-motion';
-import type { ColourData, HexColourResponse } from '../utils/utils';
+import {
+    copyToClipboard,
+    type ColourData,
+    type HexColourResponse,
+} from '../utils/utils';
 import ColourResults from '../components/color-results';
-import { copyToClipboard } from '../utils/utils';
 
-function ColourView(props: {
+function ColourView(properties: {
     readonly aiColourData: ColourData;
 }): React.JSX.Element {
     const clickHandler = async (
@@ -19,8 +22,8 @@ function ColourView(props: {
     };
 
     if (
-        props?.aiColourData.colours === undefined ||
-        props?.aiColourData.colours === null
+        properties?.aiColourData.colours === undefined ||
+        properties?.aiColourData.colours === null
     )
         return <h2>No Data</h2>;
 
@@ -39,12 +42,12 @@ function ColourView(props: {
 				{props.aiColourData.colourPrompt}
 			</h2> */}
             <div>
-                <ColourResults colours={props.aiColourData?.colours} />
+                <ColourResults colours={properties.aiColourData?.colours} />
             </div>
             <Button
                 variant="primary mt-5"
                 onClick={async () => {
-                    await clickHandler(props.aiColourData?.colours);
+                    await clickHandler(properties.aiColourData?.colours);
                 }}
             >
                 Copy JSON Results To Clipboard

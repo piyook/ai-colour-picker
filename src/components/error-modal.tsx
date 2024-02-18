@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-type ErrorModalProps = {
+type ErrorModalProperties = {
     readonly isShow: boolean;
     readonly onHide: () => void;
     readonly message: string;
@@ -12,7 +12,7 @@ export function ErrorModal({
     isShow,
     onHide,
     message,
-}: ErrorModalProps): React.JSX.Element {
+}: ErrorModalProperties): React.JSX.Element {
     return (
         <Modal
             centered
