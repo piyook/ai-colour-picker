@@ -6,6 +6,7 @@ import LoadSpinner from './components/load-spinner';
 import { ErrorModal } from './components/error-modal';
 import './App.css';
 import { uniquishId, extractHexColours, type ColourData } from './utils/utils';
+import { promptGenerator } from './utils/prompt-generator';
 import { HeaderBlock } from './components/header-block';
 import IntroBox from './components/intro-box';
 import ColourView from './views/color-view';
@@ -40,8 +41,7 @@ function App(): React.JSX.Element {
             messages: [
                 {
                     role: 'user',
-                    content: `Return only an array of a complemetary palette of ${numberOfColours} colours as hex values in json format based ${userQuestion}, including colour, hex, contrastingColourHex 
-			and description as keys in an object with colours as a key arranged in order of darkest colours first. Dont include any other text in your response.`,
+                    content: promptGenerator({ numberOfColours, userQuestion }),
                 },
             ],
             model: 'gpt-3.5-turbo',

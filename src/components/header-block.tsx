@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import FormRange from 'react-bootstrap/FormRange';
 import { Button } from 'react-bootstrap';
 
-type HeaderBlockProps = {
+type HeaderBlockProperties = {
     readonly submitHandler: (
         userQuestion: string,
         numberOfColours: string,
@@ -11,15 +11,20 @@ type HeaderBlockProps = {
 
 export function HeaderBlock({
     submitHandler,
-}: HeaderBlockProps): React.JSX.Element {
+}: HeaderBlockProperties): React.JSX.Element {
     const [numberOfColours, setNumberOfColours] = useState('6');
     const [currentTopic, setCurrentTopic] = useState<string>();
+    const [screenMode, setScreenMode] = useState('light');
     const inputData = useRef<HTMLInputElement>(null);
     const slider = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         if (inputData.current) inputData.current.focus();
     });
+
+    useEffect(() => {
+        document.documentElement.dataset.bsTheme = screenMode;
+    }, [screenMode]);
 
     const rangeHandler = () => {
         if (slider?.current) {
@@ -65,15 +70,35 @@ export function HeaderBlock({
         inputData.current.value = '';
     };
 
+    const ModeChangeHandler = () => {
+        setScreenMode(screenMode === 'dark' ? 'light' : 'dark');
+    };
+
     return (
         <header className="Header">
+            <div className="form-check form-switch d-flex align-self-end align-items-center m-10">
+                <div className="px-3">dark</div>
+                <div className="form-check form-switch ">
+                    <input
+                        className="form-check-input"
+                        type="checkbox"
+                        role="switch"
+                        id="flexSwitchCheckChecked"
+                        onChange={ModeChangeHandler}
+                    />
+                </div>
+            </div>
             <div className="Header__widgetBar">
                 <div className="Header__sliderGroup">
                     <div className="Header__colourTotal">
                         Colours : {numberOfColours}
                     </div>
                     <div className="Header__slider">
-                        <FormRange ref={slider} onChange={rangeHandler} />
+                        <FormRange
+                            ref={slider}
+                            data-bs-theme="light"
+                            onChange={rangeHandler}
+                        />
                     </div>
                 </div>
 
