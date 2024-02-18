@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import FormRange from 'react-bootstrap/FormRange';
 import { Button } from 'react-bootstrap';
 
-type HeaderBlockProps = {
+type HeaderBlockProperties = {
     readonly submitHandler: (
         userQuestion: string,
         numberOfColours: string,
@@ -11,7 +11,7 @@ type HeaderBlockProps = {
 
 export function HeaderBlock({
     submitHandler,
-}: HeaderBlockProps): React.JSX.Element {
+}: HeaderBlockProperties): React.JSX.Element {
     const [numberOfColours, setNumberOfColours] = useState('6');
     const [currentTopic, setCurrentTopic] = useState<string>();
     const inputData = useRef<HTMLInputElement>(null);

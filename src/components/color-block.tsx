@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ColorBlock(props: {
+export default function ColorBlock(properties: {
     readonly chosenColorHex: string;
     readonly chosenColorName: string;
     readonly textColor: string;
@@ -9,14 +9,14 @@ export default function ColorBlock(props: {
         <div
             className="ColorBlock"
             style={{
-                backgroundColor: props.chosenColorHex,
-                color: props.textColor,
+                backgroundColor: properties.chosenColorHex,
+                color: properties.textColor,
             }}
         >
             <p className="ColorBlock_info">
-                {props.chosenColorName} <br />
+                {properties.chosenColorName} <br />
                 <br />
-                {props.chosenColorHex}{' '}
+                {properties.chosenColorHex}{' '}
             </p>
         </div>
     );

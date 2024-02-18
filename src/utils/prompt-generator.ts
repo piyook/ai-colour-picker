@@ -1,7 +1,7 @@
-type PromptProps = { userQuestion: string; numberOfColours: string };
+type PromptProperties = { userQuestion: string; numberOfColours: string };
 
 export const promptGenerator = ({
     userQuestion,
     numberOfColours,
-}: PromptProps) => `Return only an array of a complemetary palette of ${numberOfColours} colours as hex values in json format based ${userQuestion}, including colour, hex, contrastingColourHex 
+}: PromptProperties) => `Return only an array of a complemetary palette of ${numberOfColours} colours as hex values in json format based ${userQuestion}, including colour, hex, contrastingColourHex 
 and description as keys in an object with colours as a key arranged in order of darkest colours first. The colour description should be detailled and descriptive. Dont include any other text in your response.`;
