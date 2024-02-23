@@ -22,13 +22,13 @@ function LoadSpinner({ prompt }: LoadSpinnerProperties): React.JSX.Element {
             <Spinner
                 animation="border"
                 role="status"
-                className="text-white LoadSpinner__spinner"
+                className="LoadSpinner__spinner"
             />
-            <h1 className="display-4 text-white">getting colours</h1>
+            <h1 className="display-4">getting colours</h1>
             {prompt && (
                 <>
-                    <h3 className="display-6 text-white">for</h3>
-                    <h3 className="display-6 text-white"> {prompt}</h3>
+                    <h3 className="display-6">for</h3>
+                    <h3 className="display-6"> {prompt}</h3>
                 </>
             )}
         </motion.div>

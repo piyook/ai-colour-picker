@@ -11,7 +11,7 @@ function ColourResults(properties: {
         return <div>No Colours Found - Please Try Again</div>;
 
     const renderTooltip = (colourName: string) => (
-        <Tooltip id="button-tooltip">{colourName}</Tooltip>
+        <Tooltip data-bs-theme="light">{colourName}</Tooltip>
     );
 
     return (
