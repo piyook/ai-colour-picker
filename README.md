@@ -10,8 +10,7 @@ Results can be copied to local clipboard as JSON data and pasted into a code edi
 
 ### NOTE: This is a demo project only. Never put Open AI API keys inside a production frontend client application. Instead create a backend API to contact Open AI and relay the response back to the client app using any required authorisation method
 
-![intro view](images/intro.png) ![loading view](images/loading.png)  
-![response view1](images/response.png) ![response view1](images/response2.png)
+![intro view](images/intro.png)  
 
 ## Set-up
 
@@ -30,6 +29,12 @@ From the command line run
 This will start up up the VITE dev server and serve the app from localhost:5173
 
 ## Using
+
+
+
+https://github.com/piyook/ai-colour-picker/assets/51154763/c15d8b56-628c-4ccd-82c2-f4805a48b118
+
+
 
 Enter a word or phrase to send to OpenAI to generate the desired number of colours. Press 'enter' or click the submit button to send a request.
 
