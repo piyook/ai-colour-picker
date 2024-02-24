@@ -7,7 +7,7 @@ export const uniquishId = (): string => {
 
 export type HexColourResponse =
     | Array<{
-          colour: string;
+          colourName: string;
           hex: string;
           description: string;
           contrastingColourHex: string;
