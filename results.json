@@ -1,0 +1,38 @@
+[
+    {
+        "colour": "2C3E50",
+        "hex": "#2C3E50",
+        "contrastingColourHex": "#FFFFFF",
+        "description": "A dark blue-gray color, reminiscent of the night sky. It exudes a sense of stability and professionalism, perfect for showcasing reliability and trustworthiness in freelance software development."
+    },
+    {
+        "colour": "34495E",
+        "hex": "#34495E",
+        "contrastingColourHex": "#FFFFFF",
+        "description": "A slightly lighter shade of blue-gray, symbolizing intelligence and efficiency. This color complements the darker shade perfectly, creating a harmonious balance in the color scheme."
+    },
+    {
+        "colour": "E74C3C",
+        "hex": "#E74C3C",
+        "contrastingColourHex": "#FFFFFF",
+        "description": "A vibrant shade of red, signifying passion and innovation. This color adds a pop of energy to the palette, making it eye-catching and engaging for visitors to the website."
+    },
+    {
+        "colour": "ECF0F1",
+        "hex": "#ECF0F1",
+        "contrastingColourHex": "#000000",
+        "description": "A soft, neutral grayish-white color, serving as a background color to balance out the boldness of the other shades. It provides a clean and modern aesthetic to the overall design."
+    },
+    {
+        "colour": "3498DB",
+        "hex": "#3498DB",
+        "contrastingColourHex": "#FFFFFF",
+        "description": "A bright and refreshing shade of blue, symbolizing clarity and communication. This color adds a sense of creativity and innovation to the palette, appealing to clients looking for cutting-edge solutions."
+    },
+    {
+        "colour": "27AE60",
+        "hex": "#27AE60",
+        "contrastingColourHex": "#FFFFFF",
+        "description": "A bold and dynamic shade of green, representing growth and success. This color invokes a feeling of confidence and reliability, perfect for showcasing expertise and accomplishments in freelance software development."
+    }
+]

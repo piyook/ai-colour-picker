@@ -37,7 +37,7 @@ function ColourResults(properties: {
                         >
                             <ColorBlock
                                 chosenColorHex={colour.hex}
-                                chosenColorName={colour.colour}
+                                chosenColorName={colour.colourName}
                                 textColor={colour.contrastingColourHex}
                             />
                         </motion.div>
