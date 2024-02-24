@@ -1,54 +1,54 @@
 name: standard checks
 
 on:
- workflow_dispatch:
- pull_request:
-  types: [opened, edited, synchronize, reopened]
- push:
-  branches:
-   - main
+    workflow_dispatch:
+    pull_request:
+        types: [opened, edited, synchronize, reopened]
+    push:
+        branches:
+            - main
 
 jobs:
- lint:
-  runs-on: ubuntu-latest
-  steps:
-   - uses: actions/checkout@v3
-   - uses: actions/setup-node@v3
-     with:
-      node-version: '18'
-      cache: 'npm'
-   - run: npm ci
-   - run: npm run lint
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+                  cache: 'npm'
+            - run: npm ci
+            - run: npm run lint
 
- prettier:
-  runs-on: ubuntu-latest
-  steps:
-   - uses: actions/checkout@v3
-   - uses: actions/setup-node@v3
-     with:
-      node-version: '18'
-      cache: 'npm'
-   - run: npm ci
-   - run: npm run pretty
+    prettier:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+                  cache: 'npm'
+            - run: npm ci
+            - run: npm run pretty
 
- audit:
-  runs-on: ubuntu-latest
-  steps:
-   - uses: actions/checkout@v3
-   - uses: actions/setup-node@v3
-     with:
-      node-version: '18'
-      cache: 'npm'
-   - run: npm ci
-   - run: npm audit --omit-dev
+    audit:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+                  cache: 'npm'
+            - run: npm ci
+            - run: npm audit --omit-dev
 
- cypress-run:
-  runs-on: ubuntu-22.04
-  needs: [audit, lint, prettier]
-  steps:
-   - name: Checkout
-     uses: actions/checkout@v4
-   - name: Cypress run
-     uses: cypress-io/github-action@v6
-     with:
-      component: true
+    cypress-run:
+        runs-on: ubuntu-22.04
+        needs: [audit, lint, prettier]
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Cypress run
+              uses: cypress-io/github-action@v6
+              with:
+                  component: true
