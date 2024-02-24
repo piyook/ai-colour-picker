@@ -31,8 +31,7 @@ This will start up up the VITE dev server and serve the app from localhost:5173
 ## Using
 
 
-
-https://github.com/piyook/ai-colour-picker/assets/51154763/c15d8b56-628c-4ccd-82c2-f4805a48b118
+https://github.com/piyook/ai-colour-picker/assets/51154763/6aa6cfef-4cce-4307-8a05-f0892bf79852
 
 
 
