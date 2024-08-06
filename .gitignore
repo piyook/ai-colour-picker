@@ -30,3 +30,6 @@ dist-ssr
 
 cypress/screenshots
 cypress/videos
+
+# nuke logs
+nuke-it.log
