@@ -51,7 +51,7 @@ function App(): React.JSX.Element {
         try {
             const stream = await openai.chat.completions
                 .create(parameters)
-                .catch((error) => {
+                .catch((error: unknown) => {
                     if (error instanceof OpenAI.APIError) {
                         console.log(error.status);
                         console.log(error.message);

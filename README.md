@@ -8,7 +8,7 @@ The App constructs a suitable prompt using the users input that then returns a J
 
 Results can be copied to local clipboard as JSON data and pasted into a code editor for use.
 
-### NOTE: This is a demo project only. Never put Open AI API keys inside a production frontend client application. Instead create a backend API to contact Open AI and relay the response back to the client app using any required authorisation method
+### NOTE: This is a demo project only. Never put Open AI API keys inside a production frontend client application. Instead either create a secure backend API to contact Open AI and relay the response back to the client app using any required authorisation method or use server actions.
 
 ![intro view](images/intro.png)  
 
