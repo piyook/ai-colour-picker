@@ -44,7 +44,3 @@ Change the number of colours generated using the slider to change the value from
 The loader screen will appear whilst waiting for a response from OpenAI (this can take some time) and the colour pallete will be produced once a response is received.
 
 Colours can be copied as JSON data to the clipboard to be pasted in a code editor or other software.
-
-## TO DO
-
-- Add option to connect to local dockerized Node.js backend service to contact Open AI and remove need for OpenAI API key in the App. See <https://github.com/piyook/open-ai-backend>
