@@ -15,37 +15,34 @@
         "audit": "npm audit --omit-dev",
         "test": "npx cypress run --component",
         "test:dev": "npx cypress open",
-        "nuke": "bash nuke.sh"
+        "nuke": "bash nuke.sh",
+        "validate-branch-name": "bash validate-branch-name.sh"
     },
     "dependencies": {
-        "@langchain/openai": "^0.3.0",
+        "@langchain/openai": "^0.3.17",
         "bootstrap": "^5.3.3",
         "bootswatch": "^5.3.3",
-        "cypress": "^13.14.2",
-        "framer-motion": "^11.5.4",
-        "langchain": "^0.3.2",
-        "openai": "^4.61.0",
-        "react": "^18.3.1",
-        "react-bootstrap": "^2.10.4",
-        "react-dom": "^18.3.1",
-        "react-icons": "^5.3.0"
+        "cypress": "^14.0.0",
+        "framer-motion": "^12.0.1",
+        "langchain": "^0.3.12",
+        "openai": "^4.80.0",
+        "react": "^19.0.0",
+        "react-bootstrap": "^2.10.8",
+        "react-dom": "^19.0.0",
+        "react-icons": "^5.4.0"
     },
     "devDependencies": {
-        "@commitlint/cli": "^19.5.0",
-        "@commitlint/config-conventional": "^19.5.0",
-        "@types/react": "^18.3.5",
-        "@types/react-dom": "^18.3.0",
-        "@typescript-eslint/eslint-plugin": "^8.5.0",
-        "@typescript-eslint/parser": "^8.5.0",
-        "@vitejs/plugin-react": "^4.3.1",
-        "eslint-config-xo-react": "^0.27.0",
-        "husky": "^9.1.6",
-        "lint-staged": "^15.2.10",
-        "prettier": "3.3.3",
-        "typescript": "^5.6.2",
-        "validate-branch-name": "^1.3.1",
-        "vite": "^5.4.6",
-        "xo": "^0.59.3"
+        "@commitlint/cli": "^19.6.1",
+        "@commitlint/config-conventional": "^19.6.0",
+        "@types/react": "^19.0.8",
+        "@types/react-dom": "^19.0.3",
+        "@vitejs/plugin-react": "^4.3.4",
+        "husky": "^9.1.7",
+        "lint-staged": "^15.4.2",
+        "prettier": "3.4.2",
+        "typescript": "^5",
+        "vite": "^6.0.11",
+        "xo": "^0.60.0"
     },
     "lint-staged": {
         "src/**/*.{js,jsx,ts,tsx}": "npx xo",
@@ -55,9 +52,5 @@
         "extends": [
             "@commitlint/config-conventional"
         ]
-    },
-    "validate-branch-name": {
-        "pattern": "^(main|dev|staging){1}$|^(feat|fix|hotfix|release|chore)/.+$",
-        "errorMsg": "INVALID BRANCH NAME: use format 'feat|fix|hotfix|release|core/your-branch-name'"
     }
 }

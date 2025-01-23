@@ -1,4 +1,3 @@
-import React from 'react';
 import LoadSpinner from './load-spinner';
 
 describe('<LoadSpinner />', () => {
