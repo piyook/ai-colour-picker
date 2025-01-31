@@ -1,3 +1,7 @@
+![GitHub Release](https://img.shields.io/github/v/release/piyook/ai-colour-picker)
+![Github actions](https://github.com/piyook/ai-colour-picker/actions/workflows/tests.yaml/badge.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 # AI Colour Generator / Picker Tool
 
 ## Description
